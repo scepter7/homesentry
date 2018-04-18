@@ -1,0 +1,9 @@
+{
+    "camera_warmup": 5,
+    "delta_thresh": 13,
+    "min_area": 4500,
+    "min_motion_frames": 20,
+    "min_upload_seconds": 3.0,
+    "url": "https://api.telegram.org/bot<token>/sendPhoto",
+    "chat_id": 0
+}
