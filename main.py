@@ -16,7 +16,7 @@ def alert(conf):
     '''Create an image with moving captured on it. Send it to Telegram Bot.'''
     a = Alerter()
     cv2.imwrite(a.path, frame)
-                        
+
     resp = requests.post(conf["url"], {"chat_id": conf["chat_id"]},
         files={'photo': ('{}.jpg'.format(a.name), open(a.path, 'rb'), 'image/jpg')})
     a.cleanup()
@@ -58,10 +58,10 @@ if __name__ == "__main__":
                     (x, y, w, h) = cv2.boundingRect(l)
                     (minX, maxX) = (min(minX, x), max(maxX, x + w))
                     (minY, maxY) = (min(minY, y), max(maxY, y + h))
-                
+
                 cv2.rectangle(frame, (minX, minY), (maxX, maxY),
                     (0, 0, 255), 3)
-            
+
             timestamp = datetime.now()
             ts = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
 
