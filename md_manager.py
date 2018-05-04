@@ -1,5 +1,12 @@
+"""
+This module is managing Motion Detector.
+It encapsulates motion detection process in start_md function
+and sending results to the bot in alert function.
+"""
+
 from datetime import datetime
 from threading import Thread
+import os
 import time
 import json
 import requests
@@ -14,12 +21,18 @@ from modules.alerter import Alerter
 
 def alert(conf, frame):
     '''Create an image with moving captured on it. Send it to Telegram Bot.'''
-    a = Alerter()
-    cv2.imwrite(a.path, frame)
-                        
-    resp = requests.post(conf["url"], {"chat_id": conf["chat_id"]},
-        files={'photo': ('{}.jpg'.format(a.name), open(a.path, 'rb'), 'image/jpg')})
-    a.cleanup()
+
+    alerter = Alerter()
+    cv2.imwrite(alerter.path, frame)
+
+    bot_url = conf["url"][0] + os.getenv("TG_TOKEN") + conf["url"][1]
+
+    resp = requests.post(bot_url,
+                        {"chat_id": os.getenv("chat_id")},
+                        files={'photo': ('{}.jpg'.format(alerter.name),
+                        open(alerter.path, 'rb'),
+                        'image/jpg')})
+    alerter.cleanup()
     if resp.status_code == 200:
         print("[INFO]Bot has been alerted")
     else:
@@ -27,9 +40,10 @@ def alert(conf, frame):
 
 
 def start_md():
+    '''Manage Motion Detector.'''
 
     conf = json.load(open("config.json"))
-    
+
     print("[INFO]Starting Camera...")
     vs = Camera(src=0).start()
 
@@ -57,10 +71,10 @@ def start_md():
                 (x, y, w, h) = cv2.boundingRect(l)
                 (minX, maxX) = (min(minX, x), max(maxX, x + w))
                 (minY, maxY) = (min(minY, y), max(maxY, y + h))
-                
+
             cv2.rectangle(frame, (minX, minY), (maxX, maxY),
                 (0, 0, 255), 3)
-            
+
         timestamp = datetime.now()
         ts = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
 
