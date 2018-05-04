@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
 import json
+import os
 
 from md_manager import start_md
 
@@ -22,7 +23,12 @@ class RequestHandler(BaseHTTPRequestHandler):
         post_body = self.rfile.read(content_len)
         data = json.loads(post_body)
 
-        if data["command"] == "sentry":
+        if data["command"] == "creds":
+            os.environ["TG_TOKEN"] = data["api"]
+            os.environ["chat_id"] = data["chat_id"]
+            self.send_response(200)
+            self.end_headers()
+        elif data["command"] == "sentry":
             print("[INFO]Starting Motion Detector...")
 
             t = Thread(target=start_md)
@@ -31,12 +37,6 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             self.send_response(200)
             self.end_headers()
-        elif data["command"] == "getPhoto":
-            print("[INFO]Making an image of the room...")
-            self.send_response(200)
-            self.end_headers()
-        elif data["command"] == "stop":
-            print("[INFO]Stopping Motion Detector...")
         else:
             self.send_response(404)
             self.end_headers()
