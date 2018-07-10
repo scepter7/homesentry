@@ -32,5 +32,5 @@ Configuration is performed via editing `config.json` file:
 ## Examples
 ![Sent Frame](examples/2.jpg?raw=true "Sent_Frame")
 
-This is an example of the frame, which user gets via Telegram bot. System captured possible intruder, movable object is highlighted with rectangle, date and time of detection is displayed on the bottom of the frame.
+This is an example of the frame, which user gets via Telegram bot. System has captured possible intruder, movable object is highlighted with rectangle, date and time of detection is displayed on the bottom of the frame.
 
