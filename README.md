@@ -10,6 +10,8 @@ Server sends frames with captured movement to the bot for user to see.
 This software is supposed to be used with [Telegram bot](https://github.com/eliasxyz/pytelebot).
 
 ## Requirements
+You need to have Python 3.6+ and pip installed.
+
 Requirements are listed in `requirements.txt` file. Install them with `pip install -r requirements.txt`.
 
 **Warning! Some systems, such as Raspberry Pi, require manual OpenCV compilation, installing it with pip will fail!**
