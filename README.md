@@ -4,7 +4,7 @@ Automated surveillance system written in Python with usage of OpenCV.
 ## How it works
 System consists of separate server and surveillance system, which consists of several modules, such as camera module, motion detection module, etc.
 Control of the surveillance system is performed via sending requests to the server.
-Requests are sent via Telegram bot mentioned above.
+Requests are sent via Telegram bot.
 Server sends frames with captured movement to the bot for user to see.
 
 This software is supposed to be used with [Telegram bot](https://github.com/eliasxyz/pytelebot).
@@ -12,9 +12,9 @@ This software is supposed to be used with [Telegram bot](https://github.com/elia
 ## Requirements
 Requirements are listed in `requirements.txt` file. Install them with `pip install -r requirements.txt`.
 
-**Warning! Some systems, such as Raspberry Pi require manual OpenCV compilation, installing it with pip will fail!**
+**Warning! Some systems, such as Raspberry Pi, require manual OpenCV compilation, installing it with pip will fail!**
 
-To function you have to have camera device connected.
+For software to function, you have to have camera device connected.
 
 ## Usage
 Run `python main.py`. This will run a server, which awaits commands from user.
@@ -29,5 +29,6 @@ Configuration is performed via editing `config.json` file:
 
 ## Examples
 ![Sent Frame](examples/2.jpg?raw=true "Sent_Frame")
+
 This is an example of the frame, which user gets via Telegram bot. System captured possible intruder, moveable object is highlighted with rectangle, date and time of detection is displayed on the bottom of the frame.
 
