@@ -16,6 +16,8 @@ Requirements are listed in `requirements.txt` file. Install them with `pip insta
 
 For software to function, you have to have camera device connected.
 
+Stable and fast Internet connection is also recommended. Slow Internet connection may result in delays and frames being sent in wrong order.
+
 ## Usage
 Run `python main.py`. This will run a server, which awaits commands from user.
 Usage and configuration of Telegram bot is described [here](https://github.com/eliasxyz/pytelebot).
